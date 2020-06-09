@@ -1,7 +1,10 @@
 from libscat import *
-from p2_model import PriorNet_Basic, PriorNet_Complex
-from p2_test_data import img_tensor, W1, W2
+import sys
 
+sys.path.append("../model/")
+
+from model_test import PriorNet_Basic, PriorNet_Complex
+from test_data import img_tensor, W1, W2
 
 model = PriorNet_Complex()
 model.to("cuda:0")
@@ -10,7 +13,7 @@ model_name = model.__class__.__name__
 dsName = ['random', 'cifar10', 'tinyimage']
 
 for ds in dsName:
-    PATH = './model/{}_{}.pth'.format(model_name, ds)
+    PATH = '../results/model/{}_{}.pth'.format(model_name, ds)
     
     # Load pre-traing model
     model.load_state_dict(torch.load(PATH))
