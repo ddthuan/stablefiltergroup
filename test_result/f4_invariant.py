@@ -1,6 +1,5 @@
 from libscat import *
 from p2_model import PriorNet_Complex, PriorNet_Invariant
-from p2_test_data import img_tensor, W1, W2
 
 from kymatio import Scattering2D
 
