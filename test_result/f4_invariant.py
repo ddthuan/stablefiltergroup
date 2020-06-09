@@ -1,5 +1,10 @@
 from libscat import *
-from p2_model import PriorNet_Complex, PriorNet_Invariant
+
+import sys
+
+sys.path.append("../model/")
+
+from model_test import PriorNet_Complex, PriorNet_Invariant
 
 from kymatio import Scattering2D
 
@@ -8,7 +13,7 @@ from torchsummary import summary
 model = PriorNet_Complex()
 model.to("cuda:0")
 model_name = model.__class__.__name__
-PATH = './model/{}.pth'.format(model_name)
+PATH = '../results/model/{}.pth'.format(model_name)
 
 model.load_state_dict(torch.load(PATH))
 model.eval()
