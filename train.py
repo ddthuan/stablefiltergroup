@@ -9,6 +9,7 @@ torch.backends.cudnn.deterministic = True
 device = torch.device('cuda:0')
 
 # For loading dataset
+#from dataloader_order1 import train_scatter_loader
 from dataloader_order2 import train_scatter_loader
 dataloader = train_scatter_loader
 
