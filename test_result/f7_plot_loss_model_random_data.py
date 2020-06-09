@@ -8,8 +8,8 @@ y = np.array([0.])
     
 fig = plt.figure()
 ax1  = fig.add_subplot(111)
-ax1.set_xlim([1, 30], )
-ax1.set_ylim([1, 800])
+ax1.set_xlim([1, 150], )
+ax1.set_ylim([1, 100000])
 
 # =============================================================================
 # line_raw, = ax1.plot(x, y, 'b-')
@@ -30,15 +30,15 @@ ax1.tick_params('y',   colors='b')
 
 fig.tight_layout()
 
-df_01_raw = pd.read_csv('../results/loss/loss_cifar1_raw.csv')
-df_02_complex = pd.read_csv('../results/loss/loss_cifar1_complex.csv')
+df_01_raw = pd.read_csv('../results/loss/loss_mnist_raw.csv')
+df_02_complex = pd.read_csv('../results/loss/loss_mnist_complex.csv')
 
 epoch = df_01_raw["epoch"]
 loss_raw = df_01_raw["loss"]
 loss_complex = df_02_complex["loss"]
 
 #for i in range(len(epoch)):
-for i in range(30):
+for i in range(150):
     xd = line_raw.get_xdata() ; yd = line_raw.get_ydata()
     xd = np.append(xd, i)
     yd = np.append(yd, loss_raw[i])
@@ -53,6 +53,6 @@ for i in range(30):
 
 ax1.legend()
 plt.show()    
-fig.savefig('metric/loss_inverse_cifar.png', dpi=160, bbox_inches="tight")
+fig.savefig('metric/loss_inverse.png', dpi=160, bbox_inches="tight")
     
     
