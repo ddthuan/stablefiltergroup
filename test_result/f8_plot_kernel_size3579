@@ -1,0 +1,78 @@
+# https://stackoverflow.com/questions/21920233/matplotlib-log-scale-tick-label-number-formatting/33213196
+
+from libcore import *
+from matplotlib.ticker import ScalarFormatter
+
+x = np.array([0.])
+y = np.array([0.])
+    
+fig = plt.figure()
+ax1  = fig.add_subplot(111)
+ax1.set_xlim([1, 31], )
+ax1.set_ylim([1, 2000])
+
+# =============================================================================
+# line_raw, = ax1.plot(x, y, 'b-')
+# line_complex, = ax1.plot(x, y, 'r-') 
+# =============================================================================
+
+line_3, = ax1.loglog(x, y, 'b-', basey=2, label='Kernel size = 3')
+line_5, = ax1.loglog(x, y, 'g-', basey=2, label='Kernel size = 5')
+line_7, = ax1.loglog(x, y, 'm-', basey=2, label='Kernel size = 7')
+#line_9, = ax1.loglog(x, y, 'y-', basey=2, label='Kernel size = 9')
+
+formatter = ScalarFormatter()
+formatter.set_scientific(False)
+ax1.xaxis.set_major_formatter(formatter)
+ax1.yaxis.set_major_formatter(formatter)
+
+ax1.set_xlabel('Epochs')
+ax1.set_ylabel('Loss', color ='b')
+ax1.tick_params('y',   colors='b')
+
+fig.tight_layout()
+
+df_3 = pd.read_csv('../results/loss/loss_kernel_3.csv')
+df_5 = pd.read_csv('../results/loss/loss_kernel_5.csv')
+df_7 = pd.read_csv('../results/loss/loss_kernel_7.csv')
+df_9 = pd.read_csv('../results/loss/loss_kernel_9.csv')
+
+epoch = df_3["epoch"]
+loss_3 = df_3["loss"]
+loss_5 = df_5["loss"]
+loss_7 = df_7["loss"]
+#loss_9 = df_9["loss"]
+
+#for i in range(len(epoch)):
+for i in range(30):
+    xd = line_3.get_xdata() ; yd = line_3.get_ydata()
+    xd = np.append(xd, i)
+    yd = np.append(yd, loss_3[i])
+    line_3.set_xdata(xd)    ; line_3.set_ydata(yd)
+    fig.canvas.draw()
+    
+    xd = line_5.get_xdata() ; yd = line_5.get_ydata()
+    xd = np.append(xd, i)
+    yd = np.append(yd, loss_5[i])
+    line_5.set_xdata(xd)    ; line_5.set_ydata(yd)
+    fig.canvas.draw()
+    
+    xd = line_7.get_xdata() ; yd = line_7.get_ydata()
+    xd = np.append(xd, i)
+    yd = np.append(yd, loss_7[i])
+    line_7.set_xdata(xd)    ; line_7.set_ydata(yd)
+    fig.canvas.draw()
+
+# =============================================================================
+#     xd = line_9.get_xdata() ; yd = line_9.get_ydata()
+#     xd = np.append(xd, i)
+#     yd = np.append(yd, loss_9[i])
+#     line_9.set_xdata(xd)    ; line_9.set_ydata(yd)
+#     fig.canvas.draw()    
+# =============================================================================
+
+ax1.legend()
+plt.show()    
+fig.savefig('metric/loss_kernel.png', dpi=160, bbox_inches="tight")
+    
+    
