@@ -30,8 +30,8 @@ ax1.tick_params('y',   colors='b')
 
 fig.tight_layout()
 
-df_01_raw = pd.read_csv('../metric/loss_cifar1_raw.csv')
-df_02_complex = pd.read_csv('metric/loss_cifar1_complex.csv')
+df_01_raw = pd.read_csv('../results/loss/loss_cifar1_raw.csv')
+df_02_complex = pd.read_csv('../results/loss/loss_cifar1_complex.csv')
 
 epoch = df_01_raw["epoch"]
 loss_raw = df_01_raw["loss"]
