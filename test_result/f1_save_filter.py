@@ -1,4 +1,7 @@
 import torch
+
+import sys
+sys.path.append("model/")
 from model_test import Scatt_OneOrder
 
 #model = Scatt_OneOrder(8,1,2)
