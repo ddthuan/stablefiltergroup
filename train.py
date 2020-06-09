@@ -1,5 +1,7 @@
 from libscat import *
+import sys
 
+sys.path.append("model/")
 from model import Scatt_TwoOrder
 from torch.optim import lr_scheduler
 
