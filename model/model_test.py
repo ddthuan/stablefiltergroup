@@ -184,3 +184,61 @@ class Scatt_TwoOrder(nn.Module):
         
         return s2
     
+class PriorNet_Invariant(nn.Module):
+    def __init__(self):
+        super(PriorNet_Invariant, self).__init__()
+        
+        self.lowpass = nn.Conv2d(1, 1, 7, padding=3, stride=2)
+        
+        self.real = nn.Conv2d(1, 8, 7, padding=3, stride=2)
+        self.imag = nn.Conv2d(1, 8, 7, padding=3, stride=2)
+        
+    def forward(self, x):        
+        # Lowpass
+        lp = self.lowpass(x)
+        
+        # Bandpass
+        real = self.real(x)
+        imag = self.imag(x)
+        mag = torch.sqrt(real**2 + imag**2)
+        
+        return torch.cat([lp, mag], axis=1)    
+    
+class PriorNet_Complex(nn.Module):
+    def __init__(self):
+        super(PriorNet_Complex, self).__init__()
+        self.lowpass = nn.Conv2d(1, 1, 7, padding=3, stride=2, bias=False)
+        self.real = nn.Conv2d(1, 8, 7, padding=3, stride=2, bias=False)
+        self.imag = nn.Conv2d(1, 8, 7, padding=3, stride=2, bias=False)
+        #self.eps = 1e-2
+        self.eps = nn.Parameter(torch.rand(1))
+    
+    def forward(self, x):
+        lp = self.lowpass(x)
+        real = self.real(x)
+        imag = self.imag(x)
+        mag = torch.sqrt(real**2 + imag**2 + self.eps)
+        
+        #print('EPS: -->', self.eps.data.item())
+        
+        return torch.cat([lp, mag], axis=1)    
+    
+class PriorNet_Invariant(nn.Module):
+    def __init__(self):
+        super(PriorNet_Invariant, self).__init__()
+        
+        self.lowpass = nn.Conv2d(1, 1, 7, padding=3, stride=2)
+        
+        self.real = nn.Conv2d(1, 8, 7, padding=3, stride=2)
+        self.imag = nn.Conv2d(1, 8, 7, padding=3, stride=2)
+        
+    def forward(self, x):        
+        # Lowpass
+        lp = self.lowpass(x)
+        
+        # Bandpass
+        real = self.real(x)
+        imag = self.imag(x)
+        mag = torch.sqrt(real**2 + imag**2)
+        
+        return torch.cat([lp, mag], axis=1)        
