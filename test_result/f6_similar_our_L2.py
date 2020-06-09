@@ -1,3 +1,7 @@
+import sys
+sys.path.append("../model/")
+
+
 from model_test import Scatt_OneOrder, Scatt_TwoOrder
 
 from torch.nn import functional as F
@@ -28,10 +32,10 @@ hp_imag = torch.zeros(8, 7, 7)
 # =============================================================================
     
     
-lp[0] = torch.tensor(pd.read_csv('csv/filter_cifar_phi.csv').values).data
+lp[0] = torch.tensor(pd.read_csv('../results/csv/filter_cifar_phi.csv').values).data
 for i in range(8):
-    hp_real[i] = torch.tensor(pd.read_csv('csv/filter_cifar_psi_real_{}.csv'.format(i)).values).data
-    hp_imag[i] = torch.tensor(pd.read_csv('csv/filter_cifar_psi_imag_{}.csv'.format(i)).values).data
+    hp_real[i] = torch.tensor(pd.read_csv('../results/csv/filter_cifar_psi_real_{}.csv'.format(i)).values).data
+    hp_imag[i] = torch.tensor(pd.read_csv('../results/csv/filter_cifar_psi_imag_{}.csv'.format(i)).values).data
 from model_test import Scatt_OneOrder, Scatt_TwoOrder
 
 from torch.nn import functional as F
@@ -62,10 +66,10 @@ hp_imag = torch.zeros(8, 7, 7)
 # =============================================================================
     
     
-lp[0] = torch.tensor(pd.read_csv('csv/filter_cifar_phi.csv').values).data
+lp[0] = torch.tensor(pd.read_csv('../results/csv/filter_cifar_phi.csv').values).data
 for i in range(8):
-    hp_real[i] = torch.tensor(pd.read_csv('csv/filter_cifar_psi_real_{}.csv'.format(i)).values).data
-    hp_imag[i] = torch.tensor(pd.read_csv('csv/filter_cifar_psi_imag_{}.csv'.format(i)).values).data
+    hp_real[i] = torch.tensor(pd.read_csv('../results/csv/filter_cifar_psi_real_{}.csv'.format(i)).values).data
+    hp_imag[i] = torch.tensor(pd.read_csv('../results/csv/filter_cifar_psi_imag_{}.csv'.format(i)).values).data
 
 C = 3
     
