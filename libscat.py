@@ -91,61 +91,6 @@ img_np = np.array(img)
 img_tensor = Fv.to_tensor(img)[0:3, :, :][None]
 
 
-# Neural is equal to LayerScat
-class NeuralNet(torch.nn.Module):
-    def __init__(self):
-        super(NeuralNet, self).__init__()
-        self.conv1 = torch.nn.Conv2d(1,7,3, padding=1)
-        self.pool1 = torch.nn.MaxPool2d(kernel_size=(2, 2))
-    
-    def forward(self, x):
-        output = self.conv1(x)
-        output = self.pool1(output)
-        return output
-    
-# Neural is equal to LayerScat
-class NeuralNet_Improve(torch.nn.Module):
-    def __init__(self):
-        super(NeuralNet_Improve, self).__init__()
-        self.conv1 = torch.nn.Conv2d(1,7,5, padding=2, stride=2)
-        self.bt1 = torch.nn.BatchNorm2d(7)
-    
-    def forward(self, x):        
-        output = self.conv1(x)
-        output = self.bt1(output)
-
-        return output
-
-class NeuralNet_FergalCotter(torch.nn.Module):
-    def __init__(self):
-        super(NeuralNet_FergalCotter, self).__init__()
-        self.real = torch.nn.Conv2d(1,6,5, padding=2, stride=2)
-        self.imag = torch.nn.Conv2d(1,6,5, padding=2, stride=2)
-        self.lowpass = torch.nn.Conv2d(1, 1, 5, padding=2, stride=2)
-
-        self.eps = 1e-4
-        # self.pool1 = torch.nn.MaxPool2d(kernel_size=(2, 2))
-    
-    def forward(self, x):        
-        real = self.real(x)
-        imag = self.imag(x)
-        mag = torch.sqrt(real**2 + imag**2 + self.eps)
-        lp = self.lowpass(x)
-        return torch.cat([lp, mag], axis=1)
-
-# =============================================================================
-# x = torch.randn(2, 3, 64,64)        
-# #m1 = NeuralNet_FergalCotter()
-# #m2 = NeuralNet_Improve()
-# mc = ScatLayer()
-# #out1 = m1(x)
-# #out2 = m2(x)
-# outc = mc(x)
-# #print(out1.shape)
-# #print(out2.shape)
-# print(outc.shape)
-# =============================================================================
-
 # https://github.com/kuangliu/pytorch-cifar/blob/master/utils.py
 def get_mean_and_std(dataset):
     '''Compute the mean and std value of dataset.'''
