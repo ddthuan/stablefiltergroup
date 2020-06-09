@@ -89,36 +89,6 @@ data = torch.cat(data, dim=0)
 print(data.shape)
 data_cuda = data.clone().cuda()
 
-
-
-# =============================================================================
-# # only load for testing
-# data_dir = 'tiny-imagenet-200/val'
-# normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-#                                      std=[0.229, 0.224, 0.225])
-# 
-# transform_test = transforms.Compose([
-#     transforms.CenterCrop(64),
-#     transforms.ToTensor(),
-#     normalize
-# ])
-#     
-# testloader = torch.utils.data.DataLoader(
-#     datasets.ImageFolder(data_dir, transform_test),
-#     batch_size=256, shuffle=False
-#     )
-# 
-# data = []
-# for i, x in enumerate(testloader):
-#     if i == 10:
-#         break
-#     data.append(x[0])
-# data = torch.cat(data, dim=0)
-# print(data.shape)
-# data_cuda = data.clone().cuda()
-# =============================================================================
-
-
 # Data is created randomly
 #data = torch.randn(1000, 3, 256, 256)
 data_L2 = invariant_L2(model_new, data)
@@ -168,24 +138,4 @@ d_deformation_scatter = torch.mean((data_deformation_scatter - data_scatt)**2)
 #print('Distance: {}, deformation std: {}'.format(d_deformation, d_deformation_L2))
 print('deformation size - INV {}: , scatter: P{}'.format(data_deformation_L2.shape, data_deformation_scatter.shape))
 print('Distance: {}, deformation (our): {}, scatter: {} '.format(d_deformation, d_deformation_L2, d_deformation_scatter.detach().cpu()))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
