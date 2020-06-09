@@ -7,7 +7,7 @@ K = 7 # size of kernel
 P = 3 # pading
 S = 2 # stride 2 or [2,2], [1,2], ...
 
-# the equivalent output structure with level 1 scattering transform
+# the equivalent output structure with level 1 scattering transform with L=8
 class ModelLevel1(nn.Module):
     def __init__(self):
         super(ModelLevel1, self).__init__()
@@ -23,7 +23,7 @@ class ModelLevel1(nn.Module):
    
 
 
-# the equivalent output structure with level 2 scattering transform
+# the equivalent output structure with level 2 scattering transform with L=8
 class ModelLevel2(nn.Module):
     def __init__(self):
        super(ModelLevel2, self).__init__()
