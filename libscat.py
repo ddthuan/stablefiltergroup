@@ -28,8 +28,6 @@ import timeit
 from time import process_time
 import os
 
-from pytorch_wavelets import ScatLayer
-
 from functools import partial
 
 from torchsummary import summary
